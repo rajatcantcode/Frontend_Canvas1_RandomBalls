@@ -14,7 +14,7 @@ window.addEventListener("mousemove", (e) => {
 });
 
 var maxRadius = 45;
-var minRadius = 10;
+var minRadius = 5;
 
 var colorArray = ["#7DDF64", "#C0DF85", "#DEB986", "#DB6C79", "#ED4D6E"];
 
@@ -61,8 +61,9 @@ function Circle(x, y, dx, dy, radius) {
   };
 }
 var circleArray = [];
+var totalballs = 250;
 
-for (let i = 0; i < 1100; i++) {
+for (let i = 0; i < totalballs; i++) {
   var x = Math.random() * (canvas.width - radius * 2) + radius;
   var y = Math.random() * (canvas.height - radius * 2) + radius;
   var dx = Math.random() * 5;
@@ -74,7 +75,7 @@ for (let i = 0; i < 1100; i++) {
 
 function init() {
   circleArray = [];
-  for (let i = 0; i < 1100; i++) {
+  for (let i = 0; i < totalballs; i++) {
     var x = Math.random() * (canvas.width - radius * 2) + radius;
     var y = Math.random() * (canvas.height - radius * 2) + radius;
     var dx = Math.random() * 5;
@@ -97,6 +98,16 @@ animate();
 addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  init();
+});
 
-  //   init();
+// Mobile functionality
+canvas.addEventListener("touchmove", (e) => {
+  mouse.x = e.touches[0].clientX;
+  mouse.y = e.touches[0].clientY;
+});
+
+canvas.addEventListener("touchend", () => {
+  mouse.x = undefined;
+  mouse.y = undefined;
 });
